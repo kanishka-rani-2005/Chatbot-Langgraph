@@ -1,4 +1,4 @@
-from agentic_chatbot_thread_db import chatbot, get_all_threads
+from agentic_chatbot_tool_backend import chatbot, get_all_threads
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 import streamlit as st
 import uuid 
