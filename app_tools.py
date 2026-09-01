@@ -178,10 +178,8 @@ if user_input:
     # Generate AI response
     with st.chat_message("assistant"):
 
-        # ---------------- THINKING INDICATOR ----------------
         thinking = st.empty()
         thinking.markdown("**Thinking...**")
-        # ----------------------------------------------------
 
         def generate_response():
 
@@ -198,7 +196,6 @@ if user_input:
                 stream_mode="messages"
             ):
 
-                # Remove Thinking... when first response arrives
                 if first_chunk:
                     thinking.empty()
                     first_chunk = False
