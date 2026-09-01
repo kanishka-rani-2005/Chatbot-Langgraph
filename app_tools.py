@@ -150,9 +150,6 @@ for message in st.session_state["message_history"]:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-
-
-
 user_input = st.chat_input("Type here")
 
 if user_input:
@@ -181,7 +178,15 @@ if user_input:
     # Generate AI response
     with st.chat_message("assistant"):
 
+        # ---------------- THINKING INDICATOR ----------------
+        thinking = st.empty()
+        thinking.markdown("**Thinking...**")
+        # ----------------------------------------------------
+
         def generate_response():
+
+            # Keep track of whether the first response has arrived
+            first_chunk = True
 
             for message_chunk, metadata in chatbot.stream(
                 {
@@ -192,6 +197,11 @@ if user_input:
                 config=CONFIG,
                 stream_mode="messages"
             ):
+
+                # Remove Thinking... when first response arrives
+                if first_chunk:
+                    thinking.empty()
+                    first_chunk = False
 
                 content = message_chunk.content
 
